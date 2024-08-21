@@ -1,0 +1,197 @@
+/* General Styles */
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #000;
+    color: #fff;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+header {
+    background-color: rgba(17, 17, 17, 0.8);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0.5rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ff6600;
+}
+
+/* Main Content Styles */
+main {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+h1, h2, h3 {
+    color: #ff6600;
+}
+
+/* Other styles remain the same */
+/* ... */
+
+/* Game Styles */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 300px;
+    margin: 2rem auto;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #ff6600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+}
+
+.cell.x::before,
+.cell.o::before {
+    content: attr(class);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.cell.x::before {
+    content: 'X';
+}
+
+.cell.o::before {
+    content: 'O';
+}
+
+#game-board.x .cell:not(.x):not(.o):hover::before {
+    content: 'X';
+    color: rgba(255, 255, 255, 0.3);
+}
+
+#game-board.o .cell:not(.x):not(.o):hover::before {
+    content: 'O';
+    color: rgba(255, 255, 255, 0.3);
+}
+
+#status {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+}
+
+#restart-button {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    background-color: #ff6600;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* LEGO Backdrop Styles */
+#lego-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.lego {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    background-color: #ff6600;
+    border-radius: 2px;
+    opacity: 0.7;
+    transform-style: preserve-3d;
+    animation: fall linear forwards;
+}
+
+.lego::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    box-shadow: 15px 0 rgba(255, 255, 255, 0.5);
+}
+
+@keyframes fall {
+    0% {
+        top: -20px;
+        transform: translateZ(0) rotate3d(1, 1, 1, 0deg);
+    }
+    100% {
+        top: 100vh;
+        transform: translateZ(1000px) rotate3d(1, 1, 1, 360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin-bottom: 0.5rem;
+    }
+
+    #game-board {
+        width: 240px;
+    }
+
+    .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+}
